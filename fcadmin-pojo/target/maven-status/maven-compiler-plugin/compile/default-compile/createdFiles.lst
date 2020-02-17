@@ -1,0 +1,9 @@
+org\fcadmin\pojo\Nation.class
+org\fcadmin\pojo\SysUserRole.class
+org\fcadmin\pojo\Oplog.class
+org\fcadmin\pojo\SysUser.class
+org\fcadmin\pojo\Menu.class
+org\fcadmin\pojo\Department.class
+org\fcadmin\pojo\Politicsstatus.class
+org\fcadmin\pojo\Role.class
+org\fcadmin\pojo\MenuRole.class
