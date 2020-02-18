@@ -1,4 +1,4 @@
-package org.fcadmin.config;
+package org.fcadmin.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fcadmin.utils.RespBean;

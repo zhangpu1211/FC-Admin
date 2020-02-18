@@ -1,4 +1,4 @@
-package org.fcadmin.config;
+package org.fcadmin.config.security;
 
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
