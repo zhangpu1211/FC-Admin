@@ -7,10 +7,10 @@
     -->
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="parentId" property="parentid" jdbcType="INTEGER" />
-    <result column="depPath" property="deppath" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="dep_path" property="depPath" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
-    <result column="isParent" property="isparent" jdbcType="BIT" />
+    <result column="is_parent" property="isParent" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />

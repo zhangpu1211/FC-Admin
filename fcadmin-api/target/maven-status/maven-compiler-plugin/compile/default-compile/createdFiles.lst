@@ -1,8 +1,3 @@
 org\fcadmin\MyApplication.class
-org\fcadmin\config\SecurityConfig.class
-org\fcadmin\config\MyAuthenctiationSuccessHandler.class
-org\fcadmin\config\MyAccessDecisionManager.class
-org\fcadmin\config\MyFilterInvocationSecurityMetadataSource.class
-org\fcadmin\config\MyLogoutHandler.class
+org\fcadmin\controller\system\config\SystemConfigController.class
 org\fcadmin\controller\HelloController.class
-org\fcadmin\config\MyAuthFailHandler.class

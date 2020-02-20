@@ -13,16 +13,16 @@ public class Department {
      */
     private String name;
 
-    @Column(name = "parentId")
-    private Integer parentid;
+    @Column(name = "parent_id")
+    private Integer parentId;
 
-    @Column(name = "depPath")
-    private String deppath;
+    @Column(name = "dep_path")
+    private String depPath;
 
     private Boolean enabled;
 
-    @Column(name = "isParent")
-    private Boolean isparent;
+    @Column(name = "is_parent")
+    private Boolean isParent;
 
     @Column(name = "create_time")
     private Date createTime;
@@ -66,31 +66,31 @@ public class Department {
     }
 
     /**
-     * @return parentId
+     * @return parent_id
      */
-    public Integer getParentid() {
-        return parentid;
+    public Integer getParentId() {
+        return parentId;
     }
 
     /**
-     * @param parentid
+     * @param parentId
      */
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     /**
-     * @return depPath
+     * @return dep_path
      */
-    public String getDeppath() {
-        return deppath;
+    public String getDepPath() {
+        return depPath;
     }
 
     /**
-     * @param deppath
+     * @param depPath
      */
-    public void setDeppath(String deppath) {
-        this.deppath = deppath;
+    public void setDepPath(String depPath) {
+        this.depPath = depPath;
     }
 
     /**
@@ -108,17 +108,17 @@ public class Department {
     }
 
     /**
-     * @return isParent
+     * @return is_parent
      */
-    public Boolean getIsparent() {
-        return isparent;
+    public Boolean getIsParent() {
+        return isParent;
     }
 
     /**
-     * @param isparent
+     * @param isParent
      */
-    public void setIsparent(Boolean isparent) {
-        this.isparent = isparent;
+    public void setIsParent(Boolean isParent) {
+        this.isParent = isParent;
     }
 
     /**

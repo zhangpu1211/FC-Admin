@@ -1,4 +1,4 @@
-package org.fcadmin;
+package org.fcadmin.service;
 
 import org.fcadmin.mapper.RoleMapper;
 import org.fcadmin.mapper.SysUserMapper;

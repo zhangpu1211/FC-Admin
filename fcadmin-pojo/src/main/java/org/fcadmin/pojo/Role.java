@@ -13,8 +13,8 @@ public class Role {
     /**
      * 角色名称
      */
-    @Column(name = "nameZh")
-    private String namezh;
+    @Column(name = "name_zh")
+    private String nameZh;
 
     @Column(name = "create_time")
     private Date createTime;
@@ -56,19 +56,19 @@ public class Role {
     /**
      * 获取角色名称
      *
-     * @return nameZh - 角色名称
+     * @return name_zh - 角色名称
      */
-    public String getNamezh() {
-        return namezh;
+    public String getNameZh() {
+        return nameZh;
     }
 
     /**
      * 设置角色名称
      *
-     * @param namezh 角色名称
+     * @param nameZh 角色名称
      */
-    public void setNamezh(String namezh) {
-        this.namezh = namezh;
+    public void setNameZh(String nameZh) {
+        this.nameZh = nameZh;
     }
 
     /**

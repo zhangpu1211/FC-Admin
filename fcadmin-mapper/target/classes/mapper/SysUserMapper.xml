@@ -19,4 +19,29 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="BaseResultVOMap" type="org.fcadmin.pojo.SysUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="userface" property="userface" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="SysUserWithRoles" type="org.fcadmin.vo.SysUserVO" extends="BaseResultVOMap">
+    <collection property="roles" ofType="org.fcadmin.pojo.Role">
+      <id column="rid" property="id"/>
+      <result column="rname" property="name"/>
+      <result column="rnameZh" property="nameZh"/>
+    </collection>
+  </resultMap>
+  <select id="loadUserByUsername" resultMap="BaseResultMap">
+    SELECT * FROM sys_user WHERE username=#{username}
+  </select>
+  <select id="getUserRolesByUid" resultType="org.fcadmin.pojo.Role">
+    SELECT r.* FROM role r,sys_user_role ur WHERE ur.sys_user_id=#{id} AND r.id = ur.rid
+  </select>
 </mapper>

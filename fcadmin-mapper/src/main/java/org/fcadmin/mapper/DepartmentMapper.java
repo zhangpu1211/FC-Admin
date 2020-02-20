@@ -1,7 +1,9 @@
 package org.fcadmin.mapper;
 
-
+import org.fcadmin.my.mapper.MyMapper;
 import org.fcadmin.pojo.Department;
+import org.springframework.stereotype.Repository;
 
-public interface DepartmentMapper extends tk.mybatis.mapper.common.Mapper<Department>, tk.mybatis.mapper.common.MySqlMapper<Department> {
+@Repository
+public interface DepartmentMapper extends MyMapper<Department> {
 }

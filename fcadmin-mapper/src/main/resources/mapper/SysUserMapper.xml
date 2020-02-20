@@ -39,7 +39,7 @@
     </collection>
   </resultMap>
   <select id="loadUserByUsername" resultMap="BaseResultMap">
-    select * from sys_user where username=#{username}
+    SELECT * FROM sys_user WHERE username=#{username}
   </select>
   <select id="getUserRolesByUid" resultType="org.fcadmin.pojo.Role">
     SELECT r.* FROM role r,sys_user_role ur WHERE ur.sys_user_id=#{id} AND r.id = ur.rid

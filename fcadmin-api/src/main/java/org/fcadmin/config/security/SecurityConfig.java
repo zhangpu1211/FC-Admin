@@ -1,11 +1,12 @@
 package org.fcadmin.config.security;
 
-import org.fcadmin.SysUserService;
+import org.fcadmin.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     MyFilterInvocationSecurityMetadataSource myFilterInvocationSecurityMetadataSource;
     @Autowired
     MyAccessDecisionManager myAccessDecisionManager;
+    @Autowired
+    MyAuthenticationEntryPoint myAuthenticationEntryPoint;
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -35,6 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/login");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
                 http.authorizeRequests().anyRequest().authenticated()
                 .and().formLogin()
@@ -42,6 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(myAuthenctiationSuccessHandler)
                 .failureHandler(myAuthFailHandler)
                 .and()
-                .csrf().disable();
+                .csrf().disable().exceptionHandling().authenticationEntryPoint(myAuthenticationEntryPoint);
     }
 }

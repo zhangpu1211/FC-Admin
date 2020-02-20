@@ -4,7 +4,7 @@
 #
 ############################################################
 server:
-  port: 8088
+  port: 8081
   tomcat:
     uri-encoding: UTF-8
   max-http-header-size: 80KB
@@ -17,7 +17,7 @@ spring:
   datasource: # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource # 数据源类型：HikariCP
     driver-class-name: com.mysql.jdbc.Driver # mysql驱动
-    url: jdbc:mysql://localhost:3306/fcadmin-dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect
+    url: jdbc:mysql://localhost:3306/fcadmin-dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect&serverTimezone=Asia/Shanghai
     username: root
     password: root
     hikari:

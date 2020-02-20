@@ -16,17 +16,17 @@ public class Menu {
 
     private String name;
 
-    @Column(name = "iconCls")
-    private String iconcls;
+    @Column(name = "icon_cls")
+    private String iconCls;
 
-    @Column(name = "keepAlive")
-    private Boolean keepalive;
+    @Column(name = "keep_alive")
+    private Boolean keepAlive;
 
-    @Column(name = "requireAuth")
-    private Boolean requireauth;
+    @Column(name = "require_auth")
+    private Boolean requireAuth;
 
-    @Column(name = "parentId")
-    private Integer parentid;
+    @Column(name = "parent_id")
+    private Integer parentId;
 
     private Boolean enabled;
 
@@ -115,59 +115,59 @@ public class Menu {
     }
 
     /**
-     * @return iconCls
+     * @return icon_cls
      */
-    public String getIconcls() {
-        return iconcls;
+    public String getIconCls() {
+        return iconCls;
     }
 
     /**
-     * @param iconcls
+     * @param iconCls
      */
-    public void setIconcls(String iconcls) {
-        this.iconcls = iconcls;
+    public void setIconCls(String iconCls) {
+        this.iconCls = iconCls;
     }
 
     /**
-     * @return keepAlive
+     * @return keep_alive
      */
-    public Boolean getKeepalive() {
-        return keepalive;
+    public Boolean getKeepAlive() {
+        return keepAlive;
     }
 
     /**
-     * @param keepalive
+     * @param keepAlive
      */
-    public void setKeepalive(Boolean keepalive) {
-        this.keepalive = keepalive;
+    public void setKeepAlive(Boolean keepAlive) {
+        this.keepAlive = keepAlive;
     }
 
     /**
-     * @return requireAuth
+     * @return require_auth
      */
-    public Boolean getRequireauth() {
-        return requireauth;
+    public Boolean getRequireAuth() {
+        return requireAuth;
     }
 
     /**
-     * @param requireauth
+     * @param requireAuth
      */
-    public void setRequireauth(Boolean requireauth) {
-        this.requireauth = requireauth;
+    public void setRequireAuth(Boolean requireAuth) {
+        this.requireAuth = requireAuth;
     }
 
     /**
-     * @return parentId
+     * @return parent_id
      */
-    public Integer getParentid() {
-        return parentid;
+    public Integer getParentId() {
+        return parentId;
     }
 
     /**
-     * @param parentid
+     * @param parentId
      */
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     /**
