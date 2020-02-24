@@ -1,1 +1,3 @@
+org\fcadmin\utils\BeanValidator.class
 org\fcadmin\utils\RespBean.class
+org\fcadmin\exception\ParamException.class

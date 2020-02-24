@@ -7,6 +7,8 @@ org\fcadmin\pojo\MenuRole.class
 org\fcadmin\pojo\Nation.class
 org\fcadmin\vo\MenuVO.class
 org\fcadmin\pojo\Meta.class
+org\fcadmin\param\MenuParam.class
+org\fcadmin\pojo\Menu$MenuBuilder.class
 org\fcadmin\pojo\Politicsstatus.class
 org\fcadmin\pojo\Role.class
 org\fcadmin\dto\MenuWithRolesDTO.class

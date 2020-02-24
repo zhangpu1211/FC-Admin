@@ -9,10 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface MenuMapper extends MyMapper<Menu> {
-    List<MenuVO> getAllMenus();
 
     List<MenuWithRolesDTO> getAllMenusWithRole();
 
     List<MenuVO> getMenusBySysUserId(Integer id);
 
+    List<MenuVO> getSystemMenus(Integer pid);
+    List<Integer> getIdsByPid(Integer pid);
 }

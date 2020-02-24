@@ -1,9 +1,11 @@
 package org.fcadmin.pojo;
 
+import lombok.Builder;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.Date;
-
+@Builder
 public class Menu {
     @Id
     private Integer id;

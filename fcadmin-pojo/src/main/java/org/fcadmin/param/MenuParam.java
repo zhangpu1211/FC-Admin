@@ -1,21 +1,22 @@
-package org.fcadmin.vo;
+package org.fcadmin.param;
 
 import lombok.Data;
-import org.fcadmin.pojo.Menu;
-import org.fcadmin.pojo.Meta;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
 @Data
-public class MenuVO {
+public class MenuParam {
     private Integer id;
+    @NotNull
     private String url;
+    @NotNull
     private String path;
+    @NotNull
     private String component;
+    @NotNull
     private String name;
     private String iconCls;
-    private Integer enabled;
+    @NotNull
     private Integer sort;
-    private Meta meta;
+    @NotNull
     private Integer parentId;
-    private List<Menu> children;
 }
