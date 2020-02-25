@@ -48,7 +48,7 @@ public class MenuService {
         BeanValidator.check(menuParam);
         Menu menu = Menu.builder().id(menuParam.getId()).name(menuParam.getName()).url(menuParam.getUrl()).component(menuParam.getComponent())
                 .path(menuParam.getPath()).iconCls(menuParam.getIconCls()).sort(menuParam.getSort())
-                .enabled(true).parentId(menuParam.getParentId()).requireAuth(true).build();
+                .enabled(true).parentId(menuParam.getParentId()).build();
         return menuMapper.updateByPrimaryKeySelective(menu);
     }
     @Transactional(rollbackFor = Exception.class)
