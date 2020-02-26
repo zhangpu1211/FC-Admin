@@ -16,4 +16,10 @@ public interface MenuMapper extends MyMapper<Menu> {
 
     List<MenuVO> getSystemMenus(Integer pid);
     List<Integer> getIdsByPid(Integer pid);
+
+
+    //角色管理部分
+    List<Integer> getMenuIdsByRid(Integer rid);
+
+    boolean updateMenuRole(Integer rid, Integer[] mids);
 }

@@ -19,10 +19,7 @@ import java.util.List;
 public class MenuService {
     @Autowired
     MenuMapper menuMapper;
-//    获取所有菜单，用于权限选择
-//    public List<MenuVO> getAllMenus(){
-//        return menuMapper.getAllMenus();
-//    }
+
     //用户发起请求时校验是否拥有权限
     public List<MenuWithRolesDTO> getAllMenusWithRole() {
         return menuMapper.getAllMenusWithRole();
@@ -59,4 +56,19 @@ public class MenuService {
         }
         return menuMapper.deleteByPrimaryKey(id);
     }
+
+    /**
+     *     角色管理部分
+     */
+
+    //    获取所有菜单，用于权限选择
+    public List<MenuVO> getAllMenus() {
+        return menuMapper.getSystemMenus(0);
+    }
+
+    //根据角色id查找权限id
+    public List<Integer> getMenuIdsByRid(Integer rid) {
+        return menuMapper.getMenuIdsByRid(rid);
+    }
+
 }
