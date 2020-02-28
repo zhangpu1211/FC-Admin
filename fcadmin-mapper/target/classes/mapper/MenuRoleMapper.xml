@@ -12,4 +12,10 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <insert id="insertRecord">
+    insert into menu_role (mid,rid) values
+    <foreach collection="mids" separator="," item="mid">
+      (#{mid},#{rid})
+    </foreach>
+  </insert>
 </mapper>

@@ -5,6 +5,7 @@ C:\Users\zhang\Desktop\FC\FC-Admin\fcadmin-api\src\main\java\org\fcadmin\config\
 C:\Users\zhang\Desktop\FC\FC-Admin\fcadmin-api\src\main\java\org\fcadmin\controller\system\basic\MenuController.java
 C:\Users\zhang\Desktop\FC\FC-Admin\fcadmin-api\src\main\java\org\fcadmin\config\security\MyAuthFailHandler.java
 C:\Users\zhang\Desktop\FC\FC-Admin\fcadmin-api\src\main\java\org\fcadmin\config\security\SecurityConfig.java
+C:\Users\zhang\Desktop\FC\FC-Admin\fcadmin-api\src\main\java\org\fcadmin\controller\system\basic\RoleController.java
 C:\Users\zhang\Desktop\FC\FC-Admin\fcadmin-api\src\main\java\org\fcadmin\config\security\MyFilterInvocationSecurityMetadataSource.java
 C:\Users\zhang\Desktop\FC\FC-Admin\fcadmin-api\src\main\java\org\fcadmin\controller\system\config\SystemConfigController.java
 C:\Users\zhang\Desktop\FC\FC-Admin\fcadmin-api\src\main\java\org\fcadmin\config\security\MyAuthenctiationSuccessHandler.java

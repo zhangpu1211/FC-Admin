@@ -29,9 +29,16 @@ public class RoleController {
         return menuService.getMenuIdsByRid(rid);
     }
 
-    @PutMapping("/role")
+    @PutMapping("/crole")
     public RespBean updateMenuRole(Integer rid, Integer[] mids) {
         if (roleService.updateMenuRole(rid, mids)) {
+            return RespBean.ok("更新成功!");
+        }
+        return RespBean.error("更新失败!");
+    }
+    @PutMapping("/role")
+    public RespBean updateRole(@RequestBody RoleParam roleParam) {
+        if (roleService.updateRole(roleParam)) {
             return RespBean.ok("更新成功!");
         }
         return RespBean.error("更新失败!");

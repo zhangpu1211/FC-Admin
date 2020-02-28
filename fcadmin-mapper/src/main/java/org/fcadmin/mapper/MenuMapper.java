@@ -21,5 +21,4 @@ public interface MenuMapper extends MyMapper<Menu> {
     //角色管理部分
     List<Integer> getMenuIdsByRid(Integer rid);
 
-    boolean updateMenuRole(Integer rid, Integer[] mids);
 }

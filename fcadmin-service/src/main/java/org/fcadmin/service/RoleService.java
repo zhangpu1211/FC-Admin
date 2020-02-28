@@ -28,6 +28,9 @@ public class RoleService {
         BeanValidator.check(roleParam);
         Role role = new Role();
         BeanUtils.copyProperties(roleParam, role);
+        if (!role.getName().startsWith("ROLE_")) {
+            role.setName("ROLE_" + role.getName());
+        }
         return roleMapper.insertSelective(role);
     }
 
@@ -46,5 +49,12 @@ public class RoleService {
         }
         Integer result = menuRoleMapper.insertRecord(rid, mids);
         return result==mids.length;
+    }
+
+    public boolean updateRole(RoleParam roleParam) {
+        BeanValidator.check(roleParam);
+        Role role = new Role();
+        BeanUtils.copyProperties(roleParam, role);
+        return roleMapper.updateByPrimaryKeySelective(role) == 1;
     }
 }

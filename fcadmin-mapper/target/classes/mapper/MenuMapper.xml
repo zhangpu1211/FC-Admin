@@ -100,4 +100,9 @@
   <select id="getIdsByPid" resultType="Integer">
     select id from menu where parent_id = #{id}
   </select>
+
+<!--  角色管理相关方法-->
+  <select id="getMenuIdsByRid" resultType="java.lang.Integer">
+    select mid from menu_role where rid=#{rid};
+  </select>
 </mapper>
