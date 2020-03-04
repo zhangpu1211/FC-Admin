@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fcadmin.mapper.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="org.fcadmin.pojo.SysMenu">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="redirect" jdbcType="VARCHAR" property="redirect" />
+    <result column="resources" jdbcType="VARCHAR" property="resources" />
+    <result column="menu_type" jdbcType="INTEGER" property="menuType" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="is_route" jdbcType="BIT" property="isRoute" />
+    <result column="is_leaf" jdbcType="BIT" property="isLeaf" />
+    <result column="keep_alive" jdbcType="BIT" property="keepAlive" />
+    <result column="hidden" jdbcType="INTEGER" property="hidden" />
+    <result column="internal_or_external" jdbcType="BIT" property="internalOrExternal" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <resultMap id="SideBarMenuVO" type="org.fcadmin.dto.output.SideBarMenuVO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="redirect" jdbcType="VARCHAR" property="redirect" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="resources" jdbcType="VARCHAR" property="resources" />
+    <association property="meta" javaType="org.fcadmin.pojo.Meta">
+      <result column="icon" jdbcType="VARCHAR" property="icon" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="keep_alive" jdbcType="BIT" property="keepAlive" />
+      <result column="hidden" jdbcType="INTEGER" property="hidden" />
+    </association>
+  </resultMap>
+
+  <resultMap id="getMenusBySysUserId" type="org.fcadmin.dto.output.SideBarMenuVO" extends="SideBarMenuVO">
+    <collection property="children" ofType="org.fcadmin.dto.output.SideBarMenuVO">
+      <id column="id2" jdbcType="INTEGER" property="id" />
+      <result column="name2" jdbcType="VARCHAR" property="name" />
+      <result column="redirect2" jdbcType="VARCHAR" property="redirect" />
+      <result column="resources2" jdbcType="VARCHAR" property="resources" />
+      <result column="component2" jdbcType="VARCHAR" property="component" />
+      <association property="meta" javaType="org.fcadmin.pojo.Meta">
+        <result column="icon2" jdbcType="VARCHAR" property="icon" />
+        <result column="name2" jdbcType="VARCHAR" property="name" />
+        <result column="keep_alive2" jdbcType="BIT" property="keepAlive" />
+        <result column="hidden2" jdbcType="INTEGER" property="hidden" />
+      </association>
+    </collection>
+  </resultMap>
+  <select id="getMenusBySysUserId" resultMap="getMenusBySysUserId">
+    SELECT m1.*,m2.id as id2,m2.name as name2,m2.redirect AS redirect2,m2.resources AS resources2,m2.icon as icon2,
+    m2.keep_alive as keep_alive2,m2.hidden as hidden2,m2.component as component2
+    FROM sys_menu m1, sys_menu m2,sys_role_menu mr,sys_user_role sur
+    WHERE m2.menu_type!=2 AND m1.id = m2.parent_id AND sur.uid = #{uid} AND mr.rid = sur.rid AND m2.id = mr.mid ORDER BY m1.sort desc,m2.sort desc ,m1.id asc,m2.id asc
+  </select>
+</mapper>
