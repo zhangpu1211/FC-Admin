@@ -1,9 +1,6 @@
 package org.fcadmin.config.filter;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import org.fcadmin.exception.TokenException;
+import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -21,9 +18,10 @@ import java.util.List;
 public class JwtFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        try {
+
             HttpServletRequest req = (HttpServletRequest) servletRequest;
             String jwtToken = req.getHeader("Authorization");
+        try {
             Jws<Claims> jws = Jwts.parser().setSigningKey("fcadmin").parseClaimsJws(jwtToken.replace("Bearer", ""));
             Claims claims = jws.getBody();
             String username = claims.getSubject();
@@ -31,7 +29,7 @@ public class JwtFilter extends GenericFilterBean {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(token);
             filterChain.doFilter(req, servletResponse);
-        }catch (Exception e) {
+        }catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | IllegalArgumentException e) {
             servletRequest.getRequestDispatcher("/error/exthrow").forward(servletRequest, servletResponse);
         }
     }

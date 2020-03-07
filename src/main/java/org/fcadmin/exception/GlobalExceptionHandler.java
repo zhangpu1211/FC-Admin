@@ -19,10 +19,4 @@ public class GlobalExceptionHandler {
     public RespBean expiredJwtException(TokenException e){
         return RespBean.jwtError("token错误");
     }
-
-    @ExceptionHandler(Exception.class)
-    @ResponseBody
-    public RespBean exception(Exception e){
-        return RespBean.jwtError("其他错误");
-    }
 }

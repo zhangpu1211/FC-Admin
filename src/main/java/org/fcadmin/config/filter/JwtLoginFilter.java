@@ -52,8 +52,8 @@ public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
         Map<String,Object> map = new HashMap<>();
         map.put("token",jwt);
         SysUserVO sysUserVO = (SysUserVO) authResult.getPrincipal();
-        SysUser sysUser = SysUser.builder().id(sysUserVO.getId()).nickName(sysUserVO.getNickName()).username(sysUserVO.getUsername()).avatar(sysUserVO.getAvatar()).build();
-        map.put("userInfo", sysUser);
+        sysUserVO.setPassword(null);
+        map.put("userInfo", sysUserVO);
         RespBean ok = RespBean.ok("登录成功!",map);
         String s = new ObjectMapper().writeValueAsString(ok);
         out.write(s);

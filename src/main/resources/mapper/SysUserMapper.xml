@@ -20,4 +20,61 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap id="BaseSysUserVO" type="org.fcadmin.dto.output.SysUserVO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap id="BaseSysUserListVO" type="org.fcadmin.dto.output.SysUserListVO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <select id="getSysUserByPage" resultMap="BaseSysUserListVO">
+    select id,username,nick_name,sex,phone,email,avatar,flag,open_id,create_time,update_time from sys_user where 1=1
+    <if test="sysUser.username !=null and sysUser.username!=''">
+      and sys_user.username like concat('%',#{sysUser.username},'%')
+    </if>
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from sys_user e
+    <where>
+      <if test="sysUser!=null">
+        <if test="sysUser.username !=null and sysUser.username!=''">
+          and e.username like concat('%',#{sysUser.username},'%')
+        </if>
+      </if>
+    </where>
+  </select>
 </mapper>

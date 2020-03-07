@@ -1,5 +1,6 @@
 package org.fcadmin.dto.output;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.fcadmin.pojo.SysRole;
 import org.fcadmin.pojo.SysUser;
 import org.springframework.beans.BeanUtils;
@@ -12,7 +13,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class SysUserVO implements UserDetails {
+public class SysUserListVO {
     private Integer id;
     private String username;
     private String password;
@@ -26,58 +27,14 @@ public class SysUserVO implements UserDetails {
     private String openId;
     private Date createTime;
     private Date updateTime;
-    private List<SysRole> roles;
 
-    public SysUserVO(){
+    public SysUserListVO(){
 
     }
-    public SysUserVO(SysUser sysUser){
+    public SysUserListVO(SysUser sysUser){
         BeanUtils.copyProperties(sysUser,this);
     }
-    public SysUserVO(SysUser sysUser, List<SysRole> roles){
-        BeanUtils.copyProperties(sysUser,this);
-        this.roles = roles;
-    }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
-        System.out.println(roles);
-        for (SysRole role:roles){
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return flag;
-    }
 
     public Integer getId() {
         return id;
@@ -159,12 +116,16 @@ public class SysUserVO implements UserDetails {
         this.openId = openId;
     }
 
-    public List<SysRole> getRoles() {
-        return roles;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
+    public String getPassword() {
+        return password;
+    }
+
+    public Boolean getFlag() {
+        return flag;
     }
 
     public Date getCreateTime() {

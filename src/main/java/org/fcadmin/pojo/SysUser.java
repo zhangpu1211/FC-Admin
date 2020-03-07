@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
-@Builder
+
 @Table(name = "sys_user")
 public class SysUser {
     /**
