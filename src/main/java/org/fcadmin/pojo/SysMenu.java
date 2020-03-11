@@ -1,10 +1,11 @@
 package org.fcadmin.pojo;
 
+import lombok.Builder;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
-
 @Table(name = "sys_menu")
 public class SysMenu {
     /**
@@ -91,7 +92,7 @@ public class SysMenu {
     /**
      * 是否隐藏路由: 0否,1是
      */
-    private Integer hidden;
+    private Boolean hidden;
 
     /**
      * 外链菜单打开方式 0/内部打开 1/外部打开
@@ -386,16 +387,27 @@ public class SysMenu {
      *
      * @return hidden - 是否隐藏路由: 0否,1是
      */
-    public Integer getHidden() {
+    public Boolean getRoute() {
+        return isRoute;
+    }
+
+    public void setRoute(Boolean route) {
+        isRoute = route;
+    }
+
+    public Boolean getLeaf() {
+        return isLeaf;
+    }
+
+    public void setLeaf(Boolean leaf) {
+        isLeaf = leaf;
+    }
+
+    public Boolean getHidden() {
         return hidden;
     }
 
-    /**
-     * 设置是否隐藏路由: 0否,1是
-     *
-     * @param hidden 是否隐藏路由: 0否,1是
-     */
-    public void setHidden(Integer hidden) {
+    public void setHidden(Boolean hidden) {
         this.hidden = hidden;
     }
 

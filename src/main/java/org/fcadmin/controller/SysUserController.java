@@ -6,7 +6,6 @@ import org.fcadmin.service.SysUserService;
 import org.fcadmin.utils.RespBean;
 import org.fcadmin.utils.RespPageBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

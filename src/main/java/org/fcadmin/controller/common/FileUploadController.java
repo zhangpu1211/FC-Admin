@@ -1,10 +1,12 @@
 package org.fcadmin.controller.common;
 import org.fcadmin.utils.RespBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.print.DocFlavor;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -16,15 +18,18 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/file")
 public class FileUploadController {
-
-    public final static String IMG_PATH_PREFIX = "src/main/resources/static/upload";
+    @Value("${upload.resourceHandler}")
+    private String resourceHandler;
+    @Value("${upload.location}")
+    private String location;
 
     SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 
     @PostMapping("/upload")
     public RespBean upload(MultipartFile file, HttpServletRequest req) {
         String format = sdf.format(new Date());
-        String realPath = req.getServletContext().getRealPath("/upload/img") + format;
+        //String realPath = req.getServletContext().getRealPath("/upload/img") + format;
+        String realPath = location + format;
         File folder = new File(realPath);
         if (!folder.exists()) {
             folder.mkdirs();

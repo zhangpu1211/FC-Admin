@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SysRoleMenuMapper extends MyMapper<SysRoleMenu> {
+    Integer insertRecord(Integer rid, Integer[] mids);
 }
