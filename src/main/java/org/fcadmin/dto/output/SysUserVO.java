@@ -44,7 +44,7 @@ public class SysUserVO implements UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
         System.out.println(roles);
         for (SysRole role:roles){
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
         }
         return authorities;
     }

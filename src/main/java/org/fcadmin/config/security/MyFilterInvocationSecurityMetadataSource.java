@@ -54,7 +54,7 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
                     permissions.forEach( e -> {
                         Integer rid = e.getRid();
                         SysRole role = sysRoleMapper.selectByPrimaryKey(rid);
-                        roles.add(role.getName());
+                        roles.add("ROLE_"+role.getName());
                     });
                 }
                 return SecurityConfig.createList(roles.toArray(new String[roles.size()]));

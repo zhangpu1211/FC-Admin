@@ -1,5 +1,6 @@
 package org.fcadmin.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import org.fcadmin.dto.input.SysMenuParam;
 import org.fcadmin.dto.output.SysMenuVO;
 import org.fcadmin.dto.output.SideBarMenuVO;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/system/menu")
@@ -19,8 +23,22 @@ public class SysMenuController {
     SysMenuService sysMenuService;
 
     @GetMapping("/sidebar")
-    public List<SideBarMenuVO> getSideBarMenu(Principal principal){
-        return sysMenuService.getSideBarMenu(principal);
+    public RespBean getSideBarMenu(Principal principal){
+        List<SideBarMenuVO> barMenuVO = sysMenuService.getSideBarMenu(principal);
+        List<String> resources = new ArrayList<>();
+        for (SideBarMenuVO menuVO : barMenuVO){
+            resources.add(menuVO.getResources());
+            if(CollUtil.isNotEmpty(menuVO.getChildren())){
+                List<SideBarMenuVO> childs = menuVO.getChildren();
+                for (SideBarMenuVO child : childs) {
+                    resources.add(child.getResources());
+                }
+            }
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("sidebar", barMenuVO);
+        map.put("resources", resources);
+        return RespBean.ok(null, map);
     }
 
     /**
