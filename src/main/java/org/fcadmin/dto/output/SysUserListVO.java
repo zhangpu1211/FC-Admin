@@ -27,7 +27,7 @@ public class SysUserListVO {
     private String openId;
     private Date createTime;
     private Date updateTime;
-
+    private List<SysRole> roles;
     public SysUserListVO(){
 
     }
@@ -44,6 +44,13 @@ public class SysUserListVO {
         this.id = id;
     }
 
+    public List<SysRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
+    }
 
 
     public String getPhone() {

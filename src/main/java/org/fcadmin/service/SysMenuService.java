@@ -11,6 +11,7 @@ import org.fcadmin.mapper.SysUserRoleMapper;
 import org.fcadmin.pojo.SysMenu;
 import org.fcadmin.pojo.SysUser;
 import org.fcadmin.utils.BeanValidator;
+import org.fcadmin.utils.TreeBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,9 @@ public class SysMenuService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("username",principal.getName());
         SysUser sysUser = sysUserMapper.selectOneByExample(example);
-        return sysMenuMapper.getMenusBySysUserId(sysUser.getId());
+        List<SideBarMenuVO> menus = sysMenuMapper.getMenusBySysUserId(sysUser.getId());
+        List<SideBarMenuVO> tree = TreeBuilder.buildMenuTree(menus);
+        return tree;
     }
 //
 //    public List<SysMenu> getPidOfZreo(){
@@ -85,5 +88,12 @@ public class SysMenuService {
         return sysMenuMapper.deleteByPrimaryKey(id);
     }
 
+    public List<String> getMenusResource(Principal principal) {
+        Example example = new Example(SysUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username",principal.getName());
+        SysUser sysUser = sysUserMapper.selectOneByExample(example);
+        return sysMenuMapper.getMenusResource(sysUser.getId());
+    }
 }
 

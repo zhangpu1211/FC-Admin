@@ -7,6 +7,7 @@ import org.fcadmin.mapper.SysRoleMapper;
 import org.fcadmin.mapper.SysUserMapper;
 import org.fcadmin.mapper.SysUserRoleMapper;
 import org.fcadmin.pojo.SysRole;
+import org.fcadmin.pojo.SysRoleMenu;
 import org.fcadmin.pojo.SysUser;
 import org.fcadmin.pojo.SysUserRole;
 import org.fcadmin.utils.BeanValidator;
@@ -17,8 +18,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -95,5 +99,27 @@ public class SysUserService  implements UserDetailsService {
     }
     public int delete(Integer id) {
         return sysUserMapper.deleteByPrimaryKey(id);
+    }
+
+    public SysUser getUserInfo(Principal principal) {
+        Example example = new Example(SysUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username",principal.getName());
+         SysUser sysUser = sysUserMapper.selectOneByExample(example);
+         sysUser.setPassword(null);
+         return sysUser;
+    }
+    @Transactional(propagation = Propagation.REQUIRED)
+    public boolean updateUserRole(Integer uid, Integer[] rids) {
+        //更新资源角色表
+        Example example = new Example(SysUserRole.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("uid", uid);
+        userRoleMapper.deleteByExample(example);
+        if (rids == null || rids.length == 0) {
+            return true;
+        }
+        Integer result = userRoleMapper.insertRecord(uid, rids);
+        return result==rids.length;
     }
 }

@@ -29,9 +29,11 @@
   <resultMap id="SideBarMenuVO" type="org.fcadmin.dto.output.SideBarMenuVO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
     <result column="redirect" jdbcType="VARCHAR" property="redirect" />
     <result column="component" jdbcType="VARCHAR" property="component" />
     <result column="resources" jdbcType="VARCHAR" property="resources" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
     <association property="meta" javaType="org.fcadmin.pojo.Meta">
       <result column="icon" jdbcType="VARCHAR" property="icon" />
       <result column="name" jdbcType="VARCHAR" property="name" />
@@ -40,32 +42,34 @@
     </association>
   </resultMap>
 
-  <resultMap id="getMenusBySysUserId" type="org.fcadmin.dto.output.SideBarMenuVO" extends="SideBarMenuVO">
-    <collection property="children" ofType="org.fcadmin.dto.output.SideBarMenuVO">
-      <id column="id2" jdbcType="INTEGER" property="id" />
-      <result column="name2" jdbcType="VARCHAR" property="name" />
-      <result column="redirect2" jdbcType="VARCHAR" property="redirect" />
-      <result column="resources2" jdbcType="VARCHAR" property="resources" />
-      <result column="component2" jdbcType="VARCHAR" property="component" />
-      <association property="meta" javaType="org.fcadmin.pojo.Meta">
-        <result column="icon2" jdbcType="VARCHAR" property="icon" />
-        <result column="name2" jdbcType="VARCHAR" property="name" />
-        <result column="keep_alive2" jdbcType="BIT" property="keepAlive" />
-        <result column="hidden2" jdbcType="BIT" property="hidden" />
-      </association>
-    </collection>
-  </resultMap>
-  <select id="getMenusBySysUserId" resultMap="getMenusBySysUserId">
-    SELECT m1.*,m2.id as id2,m2.name as name2,m2.redirect AS redirect2,m2.resources AS resources2,m2.icon as icon2,
-    m2.keep_alive as keep_alive2,m2.hidden as hidden2,m2.component as component2
-    FROM sys_menu m1, sys_menu m2,sys_role_menu mr,sys_user_role sur
-    WHERE m2.is_route=1 AND m1.id = m2.parent_id AND sur.uid = #{uid} AND mr.rid = sur.rid AND m2.id = mr.mid ORDER BY m1.sort desc,m2.sort desc ,m1.id asc,m2.id asc
+<!--  <resultMap id="getMenusBySysUserId" type="org.fcadmin.dto.output.SideBarMenuVO" extends="SideBarMenuVO">-->
+<!--    <collection property="children" ofType="org.fcadmin.dto.output.SideBarMenuVO">-->
+<!--      <id column="id2" jdbcType="INTEGER" property="id" />-->
+<!--      <result column="name2" jdbcType="VARCHAR" property="name" />-->
+<!--      <result column="redirect2" jdbcType="VARCHAR" property="redirect" />-->
+<!--      <result column="resources2" jdbcType="VARCHAR" property="resources" />-->
+<!--      <result column="component2" jdbcType="VARCHAR" property="component" />-->
+<!--      <association property="meta" javaType="org.fcadmin.pojo.Meta">-->
+<!--        <result column="icon2" jdbcType="VARCHAR" property="icon" />-->
+<!--        <result column="name2" jdbcType="VARCHAR" property="name" />-->
+<!--        <result column="keep_alive2" jdbcType="BIT" property="keepAlive" />-->
+<!--        <result column="hidden2" jdbcType="BIT" property="hidden" />-->
+<!--      </association>-->
+<!--    </collection>-->
+<!--  </resultMap>-->
+  <select id="getMenusBySysUserId" resultMap="SideBarMenuVO">
+    SELECT m.* FROM sys_menu m,sys_role_menu mr,sys_user_role sur
+    WHERE is_route=1  AND sur.uid = #{uid} AND mr.rid = sur.rid AND m.id = mr.mid ORDER BY m.sort desc ,m.id asc
+  </select>
+    <select id="getMenusResource" resultType="java.lang.String">
+    SELECT distinct m.resources FROM sys_menu m,sys_role_menu mr,sys_user_role sur
+    WHERE is_route=0  AND sur.uid = #{uid} AND mr.rid = sur.rid AND m.id = mr.mid ORDER BY m.sort desc ,m.id asc
   </select>
   <!--侧边栏 end-->
 
 
   <!--获取系统所有权限-->
-  <resultMap id="BaseSysMenuVo" type="org.fcadmin.pojo.SysMenu">
+  <resultMap id="BaseSysMenuVo" type="org.fcadmin.dto.output.SysMenuVO">
     <!--
       WARNING - @mbg.generated
     -->

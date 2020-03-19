@@ -1,4 +1,6 @@
 package org.fcadmin.controller.common;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.fcadmin.utils.RespBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 @RestController
 @RequestMapping("/file")
+@Api(tags={"文件上传接口"})
 public class FileUploadController {
     @Value("${upload.resourceHandler}")
     private String resourceHandler;
@@ -26,6 +29,7 @@ public class FileUploadController {
     SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 
     @PostMapping("/upload")
+    @ApiOperation(value = "单文件上传", httpMethod = "POST")
     public RespBean upload(MultipartFile file, HttpServletRequest req) {
         String format = sdf.format(new Date());
         //String realPath = req.getServletContext().getRealPath("/upload/img") + format;
@@ -47,6 +51,7 @@ public class FileUploadController {
     }
 
     @PostMapping("/uploads")
+    @ApiOperation(value = "多文件上传", httpMethod = "POST")
     public RespBean uploads(MultipartFile[] files, HttpServletRequest req) {
         String format = sdf.format(new Date());
         String realPath = req.getServletContext().getRealPath("/img") + format;

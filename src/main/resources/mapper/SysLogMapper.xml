@@ -6,13 +6,45 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="execute_time" jdbcType="VARCHAR" property="executeTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <select id="getSysLogByPage" resultMap="BaseResultMap">
+    select * from sys_log log WHERE 1=1
+    <if test="sysLog.uname !=null and sysLog.uname !=''">
+      and log.uname = #{sysLog.uname}
+    </if>
+    <if test="sysLog.ip !=null and sysLog.ip !=''">
+      and log.ip = #{sysLog.ip}
+    </if>
+    <if test="sysLog.createTime !=null and sysLog.createTime !=''">
+      and log.create_time = #{sysLog.createTime}
+    </if>
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from sys_log e
+    <where>
+      <if test="sysLog!=null">
+        <if test="sysLog.uname !=null and sysLog.uname !=''">
+          and log.uname = #{sysLog.uname}
+        </if>
+        <if test="sysLog.ip !=null and sysLog.ip !=''">
+          and log.ip = #{sysLog.ip}
+        </if>
+        <if test="sysLog.createTime !=null and sysLog.createTime !=''">
+          and log.create_time = #{sysLog.createTime}
+        </if>
+      </if>
+    </where>
+  </select>
 </mapper>

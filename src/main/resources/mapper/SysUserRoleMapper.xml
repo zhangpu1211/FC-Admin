@@ -11,4 +11,10 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <insert id="insertRecord">
+    insert into sys_user_role (uid,rid) values
+    <foreach collection="rids" separator="," item="rid">
+      (#{uid},#{rid})
+    </foreach>
+  </insert>
 </mapper>

@@ -11,7 +11,7 @@ public class SideBarMenuVO {
      * 资源编码
      */
     private String resources;
-
+    private String parentId;
     /**
      * 资源名称
      */
@@ -22,6 +22,6 @@ public class SideBarMenuVO {
     private String redirect;
     private String component;
     private Meta meta;
-
+    private Integer sort;
     private List<SideBarMenuVO> children;
 }

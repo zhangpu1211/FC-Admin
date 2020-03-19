@@ -55,13 +55,18 @@
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="token" jdbcType="VARCHAR" property="token" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="rname" jdbcType="VARCHAR" property="rname" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <collection property="roles" ofType="org.fcadmin.pojo.SysRole">
+      <id column="rids" jdbcType="INTEGER" property="id" />
+      <result column="rnameZh" jdbcType="VARCHAR" property="nameZh" />
+    </collection>
   </resultMap>
   <select id="getSysUserByPage" resultMap="BaseSysUserListVO">
-    select id,username,nick_name,sex,phone,email,avatar,flag,open_id,create_time,update_time from sys_user where 1=1
+    select u.id,u.username,u.nick_name,u.sex,u.phone,u.email,u.avatar,u.flag,u.open_id,u.create_time,u.update_time,r.id AS rids,r.name_zh AS rnameZh from sys_user u left join sys_user_role ur on u.id = ur.uid left JOIN sys_role r ON r.id=ur.rid WHERE 1=1
     <if test="sysUser.username !=null and sysUser.username!=''">
-      and sys_user.username like concat('%',#{sysUser.username},'%')
+      and u.username like concat('%',#{sysUser.username},'%')
     </if>
     <if test="page !=null and size!=null">
       limit #{page},#{size}

@@ -16,7 +16,7 @@ public class SysLog {
     /**
      * 接口名称
      */
-    private String name;
+    private String method;
 
     /**
      * 接口地址
@@ -31,8 +31,7 @@ public class SysLog {
     /**
      * 访问人ID 0:未登录用户操作
      */
-    @Column(name = "user_id")
-    private Integer userId;
+    private String uname;
 
     /**
      * 访问状态
@@ -75,38 +74,11 @@ public class SysLog {
         this.id = id;
     }
 
-    /**
-     * 获取接口名称
-     *
-     * @return name - 接口名称
-     */
-    public String getName() {
-        return name;
-    }
 
-    /**
-     * 设置接口名称
-     *
-     * @param name 接口名称
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * 获取接口地址
-     *
-     * @return url - 接口地址
-     */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * 设置接口地址
-     *
-     * @param url 接口地址
-     */
     public void setUrl(String url) {
         this.url = url;
     }
@@ -129,22 +101,20 @@ public class SysLog {
         this.ip = ip;
     }
 
-    /**
-     * 获取访问人ID 0:未登录用户操作
-     *
-     * @return user_id - 访问人ID 0:未登录用户操作
-     */
-    public Integer getUserId() {
-        return userId;
+    public String getMethod() {
+        return method;
     }
 
-    /**
-     * 设置访问人ID 0:未登录用户操作
-     *
-     * @param userId 访问人ID 0:未登录用户操作
-     */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     /**

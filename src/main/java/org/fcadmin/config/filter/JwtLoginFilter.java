@@ -32,13 +32,13 @@ public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse rep) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse rep) throws AuthenticationException, IOException {
         SysUserVO sysUserVO = new ObjectMapper().readValue(req.getInputStream(), SysUserVO.class);
         return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(sysUserVO.getUsername(),sysUserVO.getPassword()));
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse resp, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse resp, FilterChain chain, Authentication authResult) throws IOException {
         Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
         StringBuffer sb = new StringBuffer();
         for(GrantedAuthority authority : authorities){

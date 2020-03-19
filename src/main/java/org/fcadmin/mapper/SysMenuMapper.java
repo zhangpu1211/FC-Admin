@@ -13,4 +13,6 @@ public interface SysMenuMapper extends MyMapper<SysMenu> {
     List<SideBarMenuVO> getMenusBySysUserId(Integer uid);
 
     List<SysMenuVO> getSystemMenus(int i);
+
+    List<String> getMenusResource(Integer id);
 }
